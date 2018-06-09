@@ -1,0 +1,49 @@
+import cliente.*
+import taller.*
+import uniforme.*
+import color.*
+
+describe "test de pepero S.A."  {
+	
+//	var centro1 = new CentroDeProcesamiento( talleres = #{}, uniformes = #{uniforme1, uniforme2, uniforme3} )
+	var material1 = new Material(_gradoResistencia = 10, _maximoCosturasExtra = 5)
+	var uniforme1 = new Uniforme ( _cliente = deposito1, _material  = material1, _cantRefuerzos = 5, _cantCosturasExtra = 3, _leyenda = "unq s.a.")  
+//    var uniforme2 = new Uniforme ( _cliente = deposito2, _material  = material1, _cantRefuerzos = 5, _cantCosturasExtra = 3, _leyenda = "undav"  )
+//	var uniforme3 = new Uniforme ( _cliente = deposito3, _material  = material1, _cantRefuerzos = 5, _cantCosturasExtra = 3, _leyenda = "unla"  )
+	var costurero1 = new Costurero ()
+	var deposito1 = new Deposito  (_nombreEmpresa = "unq s.a.", _valorUniforme = 300, _uniformesRecibidos =[]   ) 
+//	var deposito2 = new Deposito  (_nombreEmpresa = "undav", _valorUniforme = 300, _uniformesRecibidos =[]   ) 
+//	var deposito3 = new Deposito  (_nombreEmpresa = "unla", _valorUniforme = 300, _uniformesRecibidos =[]   ) 
+	
+	test "saber cuanta resistencia tiene un uniforme"  {
+		assert.equals(uniforme1.resistencia(), 20)
+		
+	}
+	
+	test "saber si un taller puede trabajar o no con un uniforme" {
+		assert.that(costurero1.puedeTrabajarSobre(uniforme1))
+	}
+	
+	test "el uniforme es de un color aceptado por el cliente" {
+		assert.that(deposito1.aceptaColor(uniforme1))
+	}
+	
+	test "el grado de resistencia de un uniforme es el suficiente" {
+		assert.that(deposito1.aceptaResistencia(uniforme1))
+	}
+	
+	test "la leyenda que tiene un uniforme estampado es correcta" {
+		assert.that(deposito1.aceptaLeyenda(uniforme1))
+	}
+	
+	
+	
+   test "un centro de procesamiento tiene" {
+   	assert.equals(centro1.clienteQueVanARecibir(),#{deposito1, deposito2, deposito3})   	
+    }
+	
+	
+	
+	//
+	
+}
